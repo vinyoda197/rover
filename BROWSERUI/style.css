@@ -1,0 +1,35 @@
+
+body {
+    padding: 5px;
+}
+
+div {
+    text-align: center;
+}
+
+table {
+    font-size: 14px;
+}
+
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+.sensor-data {
+    padding: 10px;
+}
+
+.ctrl-button {
+    width: 150px;
+}
+
+.camera-view {
+    margin-top: 40px;
+    height: 340px;
+    text-align: center;
+}
+
+.camera-view img {
+    width: 340px;
+}

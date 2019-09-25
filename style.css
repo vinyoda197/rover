@@ -1,0 +1,14 @@
+
+body {
+    padding: 20px;
+}
+
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+.sensor-data {
+    padding: 10px;
+}
+

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"
+        >
+    <link rel="stylesheet" href="style.css">
+
+    <title>Amphibot</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <strong>Amphibot</strong>
+        </div>
+        <div class="camera-view">
+            <img style="-webkit-user-select: none;margin: auto;transform: rotate(90deg);" src="http://192.168.1.184/" width="340"
+                >
+        </div>
+        
+
+        <div style="padding: 20px; margin-top:-50px">
+            <div><button class="ctrl-button" id="forward" >Forward</button></div>
+            <div><button class="ctrl-button" id="left">Left</button><button class="ctrl-button" id="stop" >Stop</button><button class="ctrl-button" id="right" >Right</button></div>
+            <div><button class="ctrl-button" id="reverse" >Reverse</button></div>
+            <button style="margin:5px" onclick="startDataCollection()">Get Data</button>
+            <button style="margin:5px" onclick="servo()">Dump</button>
+            <div><img id="loading" src="images/loading.gif" width="100"/></div>
+        </div>
+    </div>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Date/Time</th>
+                <th scope="col">Location</th>
+                <th scope="col">Temperature</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Water</th>
+                <th scope="col">Water Turbidity</th>
+                <th scope="col">Water PH</th>
+                <!--<th scope="col">Ambient Light</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <div id="map"></div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery.min.js"
+        ></script>
+    <script src="js/popper.min.js"
+        
+        ></script>
+    <script src="js/bootstrap.min.js"
+        
+        ></script>
+    <script src="app.js"></script>
+    <script src="js/navigation.js"></script>
+    
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz7V8A-IOtYfY-FDrrufua8VssfSGWvHY&callback=initMap">
+    </script>
+
+</body>
+
+</html>
