@@ -1,5 +1,5 @@
-var PhCorrection = 8.57   // change this value to make PH as 7 when not in use.
-var TurbCorrection = 351
+var PhCorrection = 18; //8.57   // change this value to make PH as 7 when not in use.
+var TurbCorrection = -1000
 
 var map = null
 var mobot =  'http://192.168.1.183/'
@@ -36,6 +36,9 @@ function startDataCollection() {
 
   $('#loading').css('opacity', 1);
 
+  
+  getData()
+  
   $.get(mobot + "location?t=" + Math.random(), function (response) {
     try {
       $location = JSON.parse(response.trim())
@@ -46,6 +49,7 @@ function startDataCollection() {
     }
   }).fail(function () { alert("failed getting location") })
 
+  /*
   $.get(mobot + "dht?t=" + Math.random(), function (response) {
     try {
       var dht = JSON.parse(response.trim())
@@ -98,7 +102,7 @@ function startDataCollection() {
 
     }
   }).fail(function () { alert("failed getting ph data") })
-
+  */
 }
 
 
@@ -186,4 +190,45 @@ function checkDump() {
   if ($water > 0 && $turbidity <= 1500 && ($ph > 4 && $ph < 11)) {
     servo()
   }
+}
+
+function getData() {
+  $.get(mobot + "data?t=" + Math.random(), function (response) {
+    if (response == '') {
+      //alert ('hey')
+      getData()
+    }
+    try {
+      var $data = JSON.parse(response.trim())
+      $temperature = $data.Temperature
+      $humidity = $data.Humidity
+
+      // turbidity
+      var volt = $data.Voltage
+      var ntu = 0
+      volt = volt * 4.2 / 3.2
+      volt = Math.round(volt * 10) / 10
+      if (volt < 2.5) {
+        ntu = 3000
+      } else {
+        ntu = -1120.4 * volt * volt + 5742.3 * volt - 4353.8
+      }
+      // ntu = ntu
+      $turbidity = ntu < 0 ? 0 : ntu + TurbCorrection
+
+      // resolve water state
+      $water = $turbidity > 5 ? 1 : 0
+
+      // ph
+      var p = parseFloat($data.Ph) + PhCorrection
+      $dataRow.find('.ph').html(Math.abs(Math.round(p * 100) / 100))
+
+      $dataRow.find('.wat').html($water)
+      $dataRow.find('.turb').html(Math.abs(Math.round($turbidity * 100) / 100))
+      $dataRow.find('.temp').html($temperature + 'C')
+      $dataRow.find('.humid').html($humidity + '%')
+      saveSendData()
+    } catch (e) {
+    }
+  }).fail(function () { alert("failed getting location") })
 }

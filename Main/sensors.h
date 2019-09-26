@@ -6,13 +6,12 @@ void setupSensors() {
 }
 
 String sensorGet(char * type) {
-  SensorsSer.flush();
   SensorsSer.println(type); // send command
   SensorsSer.flush();
   String readString = "";
 
   while (SensorsSer.available() == 0) { // wait
-    if (millis() > 5000) {
+    if (millis() > 3000) {
       break;
     }
   }

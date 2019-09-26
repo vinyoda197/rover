@@ -76,11 +76,15 @@ void initServerHandlers() {
   });
 
   server.on("/turbidity", []() {
-    respond(sensorGet("turbidity"));
+    respond(sensorGet("turb"));
   });
 
   server.on("/ph", []() {
     respond(sensorGet("ph"));
+  });
+
+  server.on("/data", []() {
+    respond(sensorGet("d"));
   });
 
   server.on("/light", []() {
