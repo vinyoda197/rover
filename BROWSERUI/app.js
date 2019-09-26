@@ -215,6 +215,7 @@ function getData() {
       }
       // ntu = ntu
       $turbidity = ntu < 0 ? 0 : ntu + TurbCorrection
+      $turbidity = Math.abs($turbidity)
 
       // resolve water state
       $water = $turbidity > 5 ? 1 : 0
@@ -224,7 +225,7 @@ function getData() {
       $dataRow.find('.ph').html(Math.abs(Math.round(p * 100) / 100))
 
       $dataRow.find('.wat').html($water)
-      $dataRow.find('.turb').html(Math.abs(Math.round($turbidity * 100) / 100))
+      $dataRow.find('.turb').html(Math.round($turbidity * 100) / 100)
       $dataRow.find('.temp').html($temperature + 'C')
       $dataRow.find('.humid').html($humidity + '%')
       saveSendData()
