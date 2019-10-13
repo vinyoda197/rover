@@ -8,6 +8,8 @@ const int m2 = 15;
 const int m3 = 13;
 const int m4 = 0;
 
+int onReverse = LOW;
+
 void setupMobility() {
   pinMode(led, OUTPUT);
   pinMode(m1, OUTPUT);
@@ -21,6 +23,7 @@ void forward() {
   digitalWrite(m2, 1);
   digitalWrite(m3, 1);
   digitalWrite(m4, 0);
+  onReverse = LOW;
 }
 
 void halt() {
@@ -28,6 +31,7 @@ void halt() {
   digitalWrite(m2, 0);
   digitalWrite(m3, 0);
   digitalWrite(m4, 0);
+  onReverse = LOW;
 }
 
 void backing() {
@@ -35,6 +39,7 @@ void backing() {
   digitalWrite(m2, 0);
   digitalWrite(m3, 0);
   digitalWrite(m4, 1);
+  onReverse = HIGH;
 }
 
 void turnLeft() {
@@ -42,6 +47,7 @@ void turnLeft() {
   digitalWrite(m2, 1);
   digitalWrite(m3, 0);
     //digitalWrite(m4, 1);
+  onReverse = LOW;
 }
 
 void turnRight() {
@@ -49,4 +55,5 @@ void turnRight() {
   digitalWrite(m2, 0);
   digitalWrite(m3, 1);
   digitalWrite(m4, 0);
+  onReverse = LOW;
 }

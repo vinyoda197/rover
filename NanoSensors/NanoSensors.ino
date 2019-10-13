@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 #include <Servo.h> 
-//#include <OneWire.h>
-//#include <DallasTemperature.h>
+#include <OneWire.h>
+ #include <DallasTemperature.h>
 
 // Data wire is conntec to the Arduino digital pin 4
 #define ONE_WIRE_BUS 4
@@ -17,9 +17,9 @@
 #define GPS_LED 5
 #define servoPin 11
 
-//OneWire oneWire(ONE_WIRE_BUS);
+OneWire oneWire(ONE_WIRE_BUS);
 // Pass our oneWire reference to Dallas Temperature sensor 
-//DallasTemperature sensors(&oneWire);
+DallasTemperature sensors(&oneWire);
 
 SoftwareSerial mySer(3, 2); // RX, TX
 Servo Servo1;
@@ -46,7 +46,7 @@ void setup() {
 
   setupPh();
 
-  //sensors.begin();
+  sensors.begin();
   
   mySer.println("Sensors online!");
   mySer.println();
@@ -57,7 +57,7 @@ void loop() {
   fetchCommands();
   
   loopPh();
-  //sensors.requestTemperatures();
+  sensors.requestTemperatures();
   runDHT();
 
   //////////////////// turbidity
@@ -106,8 +106,11 @@ void fetchCommands() {
     if (ok) {
       //char temp[1000];
       //snprintf(temp, 1000, "{\"Temperature\": %d,\"Humidity\": %s, \"Turbidity\": %f, \"Voltage\": %f, \"Ph\": %f}", g_temp, g_humidity, ntu, rawVolt, pH.read_ph());
+      
+      int t = sensors.getTempCByIndex(0);
+
       mySer.print("{\"Temperature\": ");
-      mySer.print(g_temp);
+      mySer.print(t);
       mySer.print(",\"Humidity\": ");
       mySer.print(g_humidity);
       mySer.print(",\"Turbidity\": ");

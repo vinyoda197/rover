@@ -1,4 +1,4 @@
-static const int RXPin = 12, TXPin = 14; // GPS Module’s Tx to D6 & Rx to D5
+static const int RXPin = 3, TXPin = 1; // GPS Module’s Tx to D6 & Rx to D5
 static const uint32_t GPSBaud = 9600;
 float lati = 0.0, lngi = 0.0;
 
